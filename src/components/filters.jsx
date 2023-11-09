@@ -4,10 +4,9 @@ import Link from "next/link"
 import { useParams, usePathname } from "next/navigation"
 import toSlug from "utils/to-slug"
 
-const Filters = ({ games, params }) => {
+const Filters = ({ games }) => {
   const { name } = useParams()
   const pathname = usePathname()
-  const _games = games.map((game) => toSlug(game))
 
   if (!pathname.includes('game') && pathname !== '/') {
     return null

@@ -33,9 +33,7 @@ export const getCharacter = async (name) => {
     if (name === 'pac man') {
       name = 'pac-man'
     }
-    console.log(name);
     const response = await http.get(`/ultimate/characters?name=${name}`);
-    console.log(response.data);
     if (response.data.length !== 1) {
       return response.data.find((item) => item.name.toLowerCase() === name)
     } else {
