@@ -30,6 +30,9 @@ export const getCharacter = async (name) => {
     if (name === 'banjo %26-kazooie') {
       name = name.split(' %26-')[ 0 ]
     }
+    if (name === 'pac man') {
+      name = 'pac-man'
+    }
     console.log(name);
     const response = await http.get(`/ultimate/characters?name=${name}`);
     console.log(response.data);

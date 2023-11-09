@@ -4,19 +4,20 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 import toSlug from "utils/to-slug"
 
-const Filters = ({ games }) => {
+const Filters = ({ games, params }) => {
   const { name } = useParams()
+  const { pathname } = window.location
+  const _games = games.map((game) => toSlug(game))
 
-  if (!games.map((g) => toSlug(g)).includes(name) && name) {
+  if (!pathname.includes('game') && pathname !== '/') {
     return null
   }
 
   return (
     <div className="flex gap-x-2 gap-y-1 items-center py-14 px-10 flex-wrap">
       {games.map((game) => (
-        <Link href={`/game/${toSlug(game)}`}>
+        <Link href={`/game/${toSlug(game)}`} key={game}>
           <Chip
-            key={game}
             variant="shadow"
             classNames={{
               base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30 hover:cursor-pointer",
@@ -28,11 +29,13 @@ const Filters = ({ games }) => {
         </Link>
       ))
       }
-      {name && (<Link href="/">
-        <Chip variant="shadow">
-          Clear Filter
-        </Chip>
-      </Link>)}
+      {name && (
+        <Link href="/">
+          <Chip variant="shadow">
+            Clear Filter
+          </Chip>
+        </Link>
+      )}
     </div >
   )
 }
