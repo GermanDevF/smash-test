@@ -4,8 +4,16 @@ import Link from "next/link";
 import { getCharacter } from "services/fetch-characters";
 import { colorsAvailabilityEnum } from "utils/enums";
 
+export async function generateMetadata({ params: { name } }) {
+  const character = await getCharacter(name.replaceAll('-', ' '))
+
+  return {
+    title: `SSBU | ${character.name}`,
+  }
+}
 const Character = async ({ params: { name } }) => {
   const character = await getCharacter(name.replaceAll('-', ' '))
+
   return (
     <>
       <Link href="/" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 absolute top-12 right-12 opacity-40">
