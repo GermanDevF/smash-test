@@ -6,10 +6,9 @@ import toSlug from "utils/to-slug"
 
 const Filters = ({ games, params }) => {
   const { name } = useParams()
-  const { pathname } = window.location
   const _games = games.map((game) => toSlug(game))
 
-  if (!pathname.includes('game') && pathname !== '/') {
+  if (!pathname.includes('game')) {
     return null
   }
 
