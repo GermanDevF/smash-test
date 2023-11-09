@@ -1,14 +1,15 @@
 'use client'
 import { Chip } from "@nextui-org/react"
 import Link from "next/link"
-import { useParams } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 import toSlug from "utils/to-slug"
 
 const Filters = ({ games, params }) => {
   const { name } = useParams()
+  const pathname = usePathname()
   const _games = games.map((game) => toSlug(game))
 
-  if (!pathname.includes('game')) {
+  if (!pathname.includes('game') && pathname !== '/') {
     return null
   }
 
